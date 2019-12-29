@@ -1,0 +1,242 @@
+<head>
+    <meta charset="utf-8">
+    <title>用戶資料</title>
+
+    <script type="module" src="{{ url_for('static', filename='js/user_info.js') }}?version=1.0.0" type="text/javascript"></script>
+    <!-- <script src="{{ url_for('static', filename='js//jquery.min.js') }}"></script> -->
+    <script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="{{ url_for('static', filename='js/jquery.blockUI.js') }}"></script>
+    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <!-- <script src="{{ url_for('static', filename='css/jquery-ui.min.css') }}"></script> -->
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.min.css') }}"> -->
+    <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+    <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+
+    <script src="./../static/js/bootstrap.min.js"></script>
+    <link href="./../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./../static/css/user_info.css" rel="stylesheet">
+    <script src="./../static/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <link href="./../static/css/jquery.dataTables.min.css" rel="stylesheet">
+</head>
+<body>
+
+
+    <div class="row">
+
+        <div class="col-sm-8">
+
+            <!-- <p><span>開始日期：<input type="text" id="start_datepicker"></span><span> 結束日期：<input type="text" id="end_datepicker"></span></p> -->
+
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#summary">總覽</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#buy">購買紀錄</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#sell">賣出紀錄</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#config">使用者設定</a>
+                </li>
+            </ul>
+
+
+            <!-- <ul id="myTab" class="nav navbar-default">
+                <li class="active"><a href="#summary" data-toggle="tab">總覽</a></li>
+                <li><a href="#buy" data-toggle="tab">購買紀錄</a></li>
+                <li><a href="#sell" data-toggle="tab">賣出紀錄</a></li>
+            </ul> -->
+
+            <p><button id="btn_test">test</button></p>
+            <div id="myTabContent" class="tab-content">
+                <!-- <div class="loader"></div> -->
+                <div class="tab-pane container active" id="summary">
+                    <table style="border:3px #cccccc solid;" cellpadding="10" border='1' id="data_table" class="tablesorter">
+                        <thead>
+                            <tr>
+                                <th scope="col">股票名稱</th>
+                                <th scope="col">股票代號</th>
+                                <th scope="col">投資成本</th>
+                                <th scope="col">購買股價</th>
+                                <th scope="col">今日股價</th>
+                                <th scope="col">庫存數量</th>
+                                <!-- <th scope="col">購買時間</th> -->
+                                <th scope="col">實現損益</th>
+                                <th scope="col">未實現損益</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <p><span id="all_income">總損益:</span></p>
+                    <p><span id="all_now_cost">投資總額:</span></p>
+                    <p><span id="all_unsell_income">未實現損益::</span></p>
+
+                </div>
+
+                <div class="tab-pane container" id="buy">
+                    <p>
+                        <span>開始日期：<input type="text" id="buy_start_datepicker"></span><span> 結束日期：<input type="text" id="buy_end_datepicker"></span>
+                        <button type="button" class="btn btn-primary">Apply</button>
+                    </p>
+                    <p><button id="btn_delete_buy" class="btn btn-outline-secondary">刪除勾選資料</button></p>
+                    <table style="border:3px #cccccc solid;" cellpadding="10" border='1' id="buy_data_table" class="order-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th scope="col">股票名稱</th>
+                                <th scope="col">股票代號</th>
+                                <th scope="col">投資成本</th>
+                                <th scope="col">購買股價</th>
+                                <th scope="col">購買數量</th>
+                                <th scope="col">購買時間</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-pane container" id="sell">
+                    <p>
+                        <span>開始日期：<input type="text" id="sell_start_datepicker"></span><span> 結束日期：<input type="text" id="sell_end_datepicker"></span>
+                        <button type="button" class="btn btn-primary">Apply</button>
+                    </p>
+                    <p><button id="btn_delete_sell" class="btn btn-outline-secondary">刪除勾選資料</button></p>
+                    <table style="border:3px #cccccc solid;" cellpadding="10" border='1' id="sell_data_table" class="order-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th scope="col">股票名稱</th>
+                                <th scope="col">股票代號</th>
+                                <th scope="col">賣出價格</th>
+                                <th scope="col">賣出股價</th>
+                                <th scope="col">賣出數量</th>
+                                <th scope="col">賣出時間</th>
+                                <th scope="col">損益</th>
+                                <th scope="col">購買成本</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-pane container" id="config">
+                    <div>
+                        <p><input id="dividend_price" type="checkbox" name="div" value="dividend_price">是否計算現金股利</p>
+                        <p><input id ="dividend_stock" type="checkbox" name="div" value="dividend_stock">是否計算股票股利</p>
+                        <p>券商手續費 : <input id ="handing_fee" type="text" name="fee" value=""></p>
+                        <p>卷商手續費折扣 : <input id ="fee_count" type="text" name="fee" value=""></p>
+                    </div>
+                    <button id="btnUserConfig" type="button" class="btn btn-primary">Apply</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-4">
+            <div class="col">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sellStock" data-whatever="賣出股票資料">新增賣出股票資料</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#buyStock" data-whatever="購買股票資料">新增購買股票資料</button>
+                <button id="update_db_btn" type="button" class="btn btn-primary">更新資料庫</button>
+            </div>
+            <div class="col">
+                <p>資料庫日期:<span id="db_version"></span></p>
+            </div>
+
+        </div>
+
+        <div class="modal fade" id="buyStock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">新增股票資訊</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">股票名稱:</label>
+                        <input type="text" class="form-control" name="stock_name" id="buy_stock_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">股票代號:</label>
+                        <input type="text" class="form-control" name="stock_number" id="buy_stock_number">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">購買股價:</label>
+                        <input type="text" class="form-control" name="stock_price">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">購買數量:</label>
+                        <input name="stock_count" class="form-control" type="number"  min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">購買日期:</label>
+                        <input AUTOCOMPLETE="off" class="form-control" id="buy_datepicker" name="date">
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Apply</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="sellStock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">股票資訊</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">股票名稱:</label>
+                            <input type="text" class="form-control" name="stock_name" id="sell_stock_name">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">股票代號:</label>
+                            <input type="text" class="form-control" name="stock_number" id="sell_stock_number">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">賣出股價:</label>
+                            <input type="text" class="form-control" name="stock_price">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">賣出數量:</label>
+                            <input name="stock_count" class="form-control" type="number"  min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">賣出日期:</label>
+                            <input AUTOCOMPLETE="off" class="form-control" id="sell_datepicker" name="date">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Apply</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
