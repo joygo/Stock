@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <!-- <style>
+        div.selectBox{display:none;position:fixed;top:30%;left:30%;width:300px;height:200px;border:3px solid black;background-color:white;z-index:1002}
+        div.shelter{display:none;position:fixed;top:0px;left:0px;width:100%;height:100%;background-color:black;opacity:0.6;z-index:1001}
+    </style> -->
+    <script src="https://cdn.staticfile.org/jquery/1.8.3/jquery.min.js"></script>
+    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+
+<script type="module">
+    import { getUsefulContents } from './../static/js/functions.js';
+    function result_parser(result) {
+        return result;
+    }
+    $(function() {
+        $("#myform").submit(function(event) {
+            console.log($('form').serializeArray());
+            event.preventDefault();
+            var myObject = $('form').serializeArray();
+            var indexed_array = {};
+            var result = "";
+            $.map(myObject, function(n, i){
+                indexed_array[n['name']] = n['value'];
+            });
+
+            getUsefulContents('http://127.0.0.1:5000/add_info', 'POST', indexed_array, result => { result_parser(result); });
+
+            // myObject.forEach(function(item, index, array) {
+            // Object.assign(values, item);
+            // });
+            console.log(result);
+
+        });
+
+        $("#btn_buy").click(function(event) {
+            console.log(event);
+            window.location.reload(false);;
+            setTimeout(function(){
+                if (document.readyState === 'complete')
+                {
+                    $("#myform").append('<p>股價:<input name="stock_price" id="Radio2" value="" type="text" required/></p> <p>股價:<input name="stock_price" id="Radio2" value="" type="text" required/></p>\
+                    <p>張數:<input name="stock_count" id="Radio2" value="" type="text" required/></p><p><span>日期：<input type="text" id="start_datepicker"></span></p><button type="submit" >add</button>');
+                }
+            //do what you need here
+            }, 2000);
+        })
+
+        $("#btn_sell").click(function(event) {
+            console.log(event);
+            location.reload();
+        })
+        $("#start_datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yymmdd",
+            onSelect : function(dateText, inst){
+            // alert(dateText);
+            }
+
+        });
+
+
+    });
+</script>
+</head>
+<body>
+    <form id="myform">
+<!--
+    <input id="btnSelect" type="button" value="button" onclick="showSelectBox()"/>
+ -->
+
+    <!-- <div id="selectBox" class="selectBox"> -->
+        <p>輸入股票資料</p>
+        <input id="btn_buy" type="radio" name="action" value="buy"> 購買<br>
+        <input id="btn_sell" type="radio" name="action" value="sell"> 賣出<br>
+        <input type="radio" name="action" value="dividend"> 股利<br>
+        <!-- <p>股票名稱:<input name="stock_name" value="" type="text" required/></p>
+        <p>股價:<input name="stock_price" id="Radio2" value="" type="text" required/></p>
+        <p>張數:<input name="stock_count" id="Radio2" value="" type="text" required/></p>
+        <p><span>日期：<input type="text" id="start_datepicker"></span></p>
+        <button type='submit' >add</button> -->
+    <!-- </div>
+    <div id="shelter" class="shelter"></div> -->
+
+    </form>
+</body>
+
+</html>

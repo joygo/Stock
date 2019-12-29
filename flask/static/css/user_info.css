@@ -1,0 +1,83 @@
+#data_table {
+    border:1px solid #C0C0C0;
+    border-collapse:collapse;
+    padding:20px;
+}
+#data_table th {
+    border:1px solid #C0C0C0;
+    padding:20px;
+    text-align:center;
+    background:#F0F0F0;
+}
+#data_table td {
+    border:1px solid #C0C0C0;
+    text-align:center;
+    padding:10px;
+}
+
+#buy_data_table {
+    border:1px solid #C0C0C0;
+    border-collapse:collapse;
+    padding:5px;
+}
+#buy_data_table th {
+    border:1px solid #C0C0C0;
+    padding:5px;
+    text-align:center;
+    background:#F0F0F0;
+}
+#buy_data_table td {
+    border:1px solid #C0C0C0;
+    text-align:center;
+    padding:5px;
+}
+
+#sell_data_table {
+    border:1px solid rgb(70, 66, 66);
+    border-collapse:collapse;
+    padding:5px;
+}
+#sell_data_table th {
+    border:1px solid #C0C0C0;
+    padding:5px;
+    text-align:center;
+    background:#F0F0F0;
+}
+#sell_data_table td {
+    border:1px solid #C0C0C0;
+    text-align:center;
+    padding:5px;
+}
+
+
+.ui-autocomplete {
+    max-height: 150;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+/* IE 6 不支持 max-height
+* 我们使用 height 代替，但是这会强制菜单总是显示为那个高度
+*/
+* html .ui-autocomplete {
+height: 150px;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
